@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="range-input">
+      波浪大小
+      <input type="range" id="flood" min="12" max="80" step="1" value="20">
+      波动速度
+      <input type="range" id="wind" min="5" max="50" step="5">
+    </div>
+  <script src="http://cdn.gbtags.com/three.js/r68/three.min.js"></script>
+  <script>
+    var container;
+    var camera, scene, renderer;
+    var start;
+    var plane,x = 20,y = 0.0005;
+    function init() {
+      start = Date.now();
+      container = document.createElement('div');
+      document.body.appendChild(container);
+      // 照相机 PerspectiveCamera远景相机
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 7000);
+      camera.position.z = 600;
+      // 渲染器
+      renderer = new THREE.WebGLRenderer();
+      renderer.setClearColor(0xffffff);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      container.appendChild(renderer.domElement); 
+      // 场景
+      scene = new THREE.Scene();
+      // 点光源
+      var light = new THREE.PointLight(0xffffff, 1.2);
+      light.position.set(0, 500,0);
+      scene.add(light);
+      var geometry = new THREE.PlaneGeometry(window.innerWidth - 500, 1600, 3, 50);
+      geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI / 2 ))
+      var material = new THREE.MeshPhongMaterial({
+        color: 0x56baed
+      });
+      plane = new THREE.Mesh(geometry, material);
+      plane.position.y = -30;
+      scene.add(plane);
+      // addEvents();
+    }
+    window.onload = function () {
+      // 滑块值改变
+      var flood = document.getElementById('flood')
+      flood.addEventListener('input', function () {
+        x = flood.value;
+        } 
+      )
+      var wind = document.getElementById('wind')
+      wind.addEventListener('input', function () {
+        y = wind.value / 10000;
+        } 
+      )
+    }
+    function animate() {
+      var timer = Date.now() - start; 
+      for (var i = 0; i < plane.geometry.vertices.length; i++) {
+        // vertices用来保存模型中所有顶点位置的数组
+        plane.geometry.vertices[i].y = Math.sin( i + timer * y ) * x;
+      } 
+      // 如果顶点数组更新就设置为true
+      plane.geometry.verticesNeedUpdate = true;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      // 更新相机投影矩阵
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight );
+    }
+    function addEvents () {
+      window.addEventListener('resize', onResize, false);
+      animate();
+    }
+    init();
+    animate();
+  </script>
+</body>
+</html>
