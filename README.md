@@ -75,5 +75,5 @@ function animate() {
 
 ![](http://upload-images.jianshu.io/upload_images/6734924-a208f6e6d95e7a91.gif?imageMogr2/auto-orient/strip)
 
-也可以点[这里](http://htmlpreview.github.io/?https://github.com/zzr716/Threehs_wave/blob/master/wave.html)体验哦~
+也可以点[这里](https://zzr716.github.io/Threehs_wave/wave.html)体验哦~
 最后，本人也是学习没多久，如果有意见欢迎交流。如果觉得还行，给个[小星星](https://github.com/zzr716/Threehs_wave)呗~
