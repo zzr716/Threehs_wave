@@ -21,7 +21,7 @@ scene=newTHREE.Scene();
 场景，相机，渲染器之间的关系
 场景相当于舞台，可以放置需要的角色或物体。相机的作用就是在场景中取一个合适的景，把它拍下来。而渲染器就是将相机拍摄下来的图片，放到浏览器中去显示。他们三者关系如图：
 
-![](http://upload-images.jianshu.io/upload_images/6734924-5c70167023e3532d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)场景、相机、渲染器关系图
+![](http://upload-images.jianshu.io/upload_images/6734924-5c70167023e3532d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 设置光源
 ```
